@@ -25,7 +25,9 @@ export function HomePage() {
         <li>
           Fields: <code>english</code>, then either <code>image: true</code>{' '}
           (blob named after the document <code>id</code>) or{' '}
-          <code>translations</code> (BCP 47 keys to the word in that language).
+          <code>translations</code> (BCP 47 keys to the word in that language).{' '}
+          <code>description</code> is authoring notes for translators and is
+          not shown on the list.
         </li>
       </ul>
     </section>

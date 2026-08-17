@@ -15,7 +15,8 @@ Provide translations for the English terms in the table at the bottom of this pr
 
 I would like translations into the following languages:
 
-- Arabic
+- {{language 1}}
+- {{language 2}}
 
 The table of terms has the columns `English term` and `Description of English term`, which provide context and disambiguation.
 

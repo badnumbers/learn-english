@@ -30,6 +30,7 @@ The Vite dev server proxies `/api` to `http://localhost:7071`.
 {
   "id": "cat",
   "english": "cat",
+  "description": "A small domesticated mammal often kept as a pet.",
   "translations": {
     "ar-001": "قطة",
     "ar-EG": "قطة",
@@ -41,7 +42,7 @@ The Vite dev server proxies `/api` to `http://localhost:7071`.
 }
 ```
 
-Use `image: true` (blob named after `id` in the `images` container) or `translations` (BCP 47 language tags → text). `audio: true` is the same convention in the `audio` container. See [`docs/blob-media.md`](docs/blob-media.md). Translation-key conventions belong in [`docs/`](docs/).
+`description` is English gloss used when collecting translations. The app does not show it and must not strip it (or other extra properties) if a document is written back. Use `image: true` (blob named after `id` in the `images` container) or `translations` (BCP 47 language tags → text). `audio: true` is the same convention in the `audio` container. See [`docs/blob-media.md`](docs/blob-media.md). Translation-key conventions belong in [`docs/`](docs/).
 
 ## Azure Static Web Apps
 
