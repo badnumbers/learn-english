@@ -15,14 +15,17 @@ Provide translations for the English terms in the table at the bottom of this pr
 
 I would like translations into the following languages:
 
-- {{language 1}}
-- {{language 2}}
+- Arabic
 
 The table of terms has the columns `English term` and `Description of English term`, which provide context and disambiguation.
 
 Follow these instructions when deciding on translations:
 
+If the `English term` and `Description of English term` don't appear to correspond, please flag this, as it is likely to be human error.
+
 Prefer the most widely understood, pan‑regional standard term in the target language (e.g., Modern Standard Arabic rather than dialectal forms).
+
+Avoid terms that are strongly dialect‑specific unless they are also widely understood across regions.
 
 Choose the simplest and most commonly used term appropriate for beginner learners.
 
@@ -40,4 +43,6 @@ Output the translations in a fenced code block containing a markdown table.
 
 The table of terms to translate is below:
 
-{{ table of terms }}
+| English term | Description of English term |
+|----------|----------|
+|  |  |
