@@ -3,6 +3,7 @@ export type VocabItem = {
   english: string
   translations: Record<string, string> | null
   imageUrl: string | null
+  audioUrl: string | null
   found: boolean
 }
 

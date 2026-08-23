@@ -17,11 +17,8 @@ internal sealed class VocabDocument
     [JsonProperty("translations")]
     public Dictionary<string, string>? Translations { get; set; }
 
-    [JsonProperty("image")]
-    public bool Image { get; set; }
-
-    [JsonProperty("audio")]
-    public bool Audio { get; set; }
+    [JsonProperty("files")]
+    public Dictionary<string, string>? Files { get; set; }
 
     [JsonExtensionData]
     public Dictionary<string, JToken>? ExtraProperties { get; set; }

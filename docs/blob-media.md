@@ -1,19 +1,21 @@
 # Blob media (images and audio)
 
-Blob names **are the Cosmos document `id`**. The API builds public URLs from `MEDIA_BASE_URL`:
+Cosmos `files` maps a kind of media to a **blob file name**. The API builds public URLs from `MEDIA_BASE_URL` and the matching container:
 
 ```
-{MEDIA_BASE_URL}/{container}/{id}
-https://YOUR_ACCOUNT.blob.core.windows.net/images/cat
-https://YOUR_ACCOUNT.blob.core.windows.net/images/look-after
-https://YOUR_ACCOUNT.blob.core.windows.net/audio/cat
+{MEDIA_BASE_URL}/{container}/{fileName}
+https://YOUR_ACCOUNT.blob.core.windows.net/images/shirt.jpg
+https://YOUR_ACCOUNT.blob.core.windows.net/audio/shirt.mp3
 ```
 
-Set `image` / `audio` to `true` on the document when that blob exists. There is no filename or extension in Cosmos or in the blob name. Set the blob **Content-Type** when uploading (for example `image/jpeg` or `audio/mpeg`) so the browser can play the file.
+| `files` key | Container (default) | Example value |
+| --- | --- | --- |
+| `image` | `images` | `shirt.jpg` |
+| `audio` | `audio` | `shirt.mp3` |
+
+Omit a key when that media does not exist. File names must be a single segment with an extension (`shirt.jpg`, `look-after.svg`). No host, path, or `..`. The name does not have to equal the document `id`.
 
 Configure `MEDIA_BASE_URL` in `api/local.settings.json` and in the Function App settings. Optional: `MEDIA_IMAGES_CONTAINER`, `MEDIA_AUDIO_CONTAINER`.
-
-Hyphens in `id` (as in `look-after`) are valid in Cosmos DB document IDs and in Azure blob names. Cosmos forbids `/`, `\`, `?`, and `#` in `id`; our slugs do not use those.
 
 The API never uses a storage account key or SAS. The browser loads media with a plain GET of the public URL.
 

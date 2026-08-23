@@ -5,4 +5,5 @@ public sealed record VocabItemResponse(
     string English,
     IReadOnlyDictionary<string, string>? Translations,
     string? ImageUrl,
+    string? AudioUrl,
     bool Found);

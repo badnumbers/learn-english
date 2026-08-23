@@ -23,11 +23,11 @@ export function HomePage() {
           partition key <code>/id</code>.
         </li>
         <li>
-          Fields: <code>english</code>, then either <code>image: true</code>{' '}
-          (blob named after the document <code>id</code>) or{' '}
-          <code>translations</code> (BCP 47 keys to the word in that language).{' '}
-          <code>description</code> is authoring notes for translators and is
-          not shown on the list.
+          Fields: <code>english</code>, then either{' '}
+          <code>files.image</code> (a blob name such as{' '}
+          <code>shirt.jpg</code>) or <code>translations</code> (BCP 47 keys to
+          the word in that language). <code>description</code> is authoring
+          notes for translators and is not shown on the list.
         </li>
       </ul>
     </section>

@@ -71,11 +71,12 @@ public sealed class VocabRepository
                     doc.Id,
                     english,
                     NormalizeTranslations(doc.Translations),
-                    doc.Image ? _media.ImageUrl(doc.Id) : null,
+                    _media.ImageUrl(FileName(doc.Files, "image")),
+                    _media.AudioUrl(FileName(doc.Files, "audio")),
                     Found: true);
             }
 
-            return new VocabItemResponse(slug, slug, null, null, Found: false);
+            return new VocabItemResponse(slug, slug, null, null, null, Found: false);
         }).ToList();
     }
 
@@ -95,5 +96,24 @@ public sealed class VocabRepository
             .ToDictionary(pair => pair.Key.Trim(), pair => pair.Value.Trim(), StringComparer.Ordinal);
 
         return cleaned.Count == 0 ? null : cleaned;
+    }
+
+    private static string? FileName(Dictionary<string, string>? files, string kind)
+    {
+        if (files is null)
+        {
+            return null;
+        }
+
+        foreach (var pair in files)
+        {
+            if (string.Equals(pair.Key, kind, StringComparison.OrdinalIgnoreCase)
+                && !string.IsNullOrWhiteSpace(pair.Value))
+            {
+                return pair.Value.Trim();
+            }
+        }
+
+        return null;
     }
 }

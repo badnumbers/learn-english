@@ -177,7 +177,55 @@ code {
   font-style: italic;
 }
 
+.card-word {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  text-align: start;
+}
+
+.card-play-col {
+  flex: 0 0 auto;
+}
+
+.card-play-col audio {
+  display: none;
+}
+
 .card-english {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
   font-size: clamp(1.8rem, 5vw, 2.4rem);
   line-height: 1.15;
+}
+
+.card-play {
+  --play: #16a34a;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--play) 45%, var(--border));
+  border-radius: 0.55rem;
+  background: var(--bg);
+  color: var(--play);
+  cursor: pointer;
+}
+
+.card-play-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.card-play:hover,
+.card-play:focus-visible {
+  border-color: var(--play);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card-play {
+    --play: #4ade80;
+  }
 }
