@@ -1,23 +1,17 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { AppFrame } from './components/AppFrame'
 import { HomePage } from './pages/HomePage'
 import { VocabPage } from './pages/VocabPage'
 
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="shell">
-        <header className="site-header">
-          <Link className="site-title" to="/">
-            Learn English
-          </Link>
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/vocab" element={<VocabPage />} />
-          </Routes>
-        </main>
-      </div>
+      <AppFrame>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/vocab" element={<VocabPage />} />
+        </Routes>
+      </AppFrame>
     </BrowserRouter>
   )
 }

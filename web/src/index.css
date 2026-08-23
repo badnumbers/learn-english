@@ -73,14 +73,29 @@ code {
   color: var(--ink);
 }
 
+.app-frame {
+  min-height: 100svh;
+}
+
+.site-bar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.site-bar-inner,
+.qr-panel-inner,
 .shell {
   max-width: 40rem;
   margin: 0 auto;
-  padding: 1.25rem 1.25rem 3rem;
 }
 
-.site-header {
-  margin-bottom: 2rem;
+.site-bar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1.25rem;
 }
 
 .site-title {
@@ -88,6 +103,57 @@ code {
   font-weight: 700;
   text-decoration: none;
   letter-spacing: 0.02em;
+}
+
+.site-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-bar-button,
+.qr-close {
+  min-height: 2.4rem;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.site-bar-button[aria-expanded="true"],
+.site-bar-button:hover,
+.site-bar-button:focus-visible,
+.qr-close:hover,
+.qr-close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.qr-panel {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.qr-panel-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 1.25rem 1.35rem;
+}
+
+.qr-panel-inner svg {
+  display: block;
+  background: #fff;
+  padding: 0.5rem;
+}
+
+.shell {
+  padding: 1.5rem 1.25rem 3rem;
 }
 
 .page--home .example-label {
