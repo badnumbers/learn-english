@@ -1,4 +1,4 @@
-function primaryLanguage(tag: string): string {
+export function primaryLanguage(tag: string): string {
   const primary = tag.trim().split('-')[0]
   return primary?.toLowerCase() ?? ''
 }

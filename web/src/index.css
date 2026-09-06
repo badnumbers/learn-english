@@ -114,6 +114,7 @@ code {
 .site-bar-button,
 .qr-close {
   min-height: 2.4rem;
+  min-width: 2.4rem;
   padding: 0.3rem 0.85rem;
   border: 1px solid var(--border);
   border-radius: 0.45rem;
@@ -122,6 +123,17 @@ code {
   font: inherit;
   font-weight: 650;
   cursor: pointer;
+}
+
+a.site-bar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.site-bar-icon {
+  display: block;
 }
 
 .site-bar-button[aria-expanded="true"],
@@ -180,6 +192,36 @@ code {
 
 .notes li {
   margin-bottom: 0.6rem;
+}
+
+.language-list {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.language-option {
+  width: 100%;
+  min-height: 3.2rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1.35rem;
+  font-weight: 650;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+}
+
+.language-option--selected,
+.language-option:hover,
+.language-option:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .status {

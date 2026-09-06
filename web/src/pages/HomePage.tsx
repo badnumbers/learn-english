@@ -15,8 +15,11 @@ export function HomePage() {
         </li>
         <li>
           Optional <code>lang</code> is a BCP 47 tag (for example{' '}
-          <code>ar-EG</code>) used to pick one translation. Without it, every
-          translation is shown.
+          <code>ar-EG</code>) that picks one translation and is saved in the
+          browser. Students can also choose a language from the globe in the
+          header. That choice is remembered locally and is not written onto a
+          link that has no <code>lang</code>. Without either, every translation
+          is shown.
         </li>
         <li>
           Each Cosmos document <code>id</code> must match the slug. Use

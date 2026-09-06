@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { fetchVocab } from '../api/vocab'
 import { VocabCard } from '../components/VocabCard'
+import { useSourceLanguage } from '../hooks/useSourceLanguage'
 import type { VocabItem } from '../types'
 
 export function VocabPage() {
   const [searchParams] = useSearchParams()
   const wordsQuery = searchParams.get('w') ?? ''
-  const lang = searchParams.get('lang')
+  const lang = useSourceLanguage()
   const [items, setItems] = useState<VocabItem[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
