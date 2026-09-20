@@ -165,6 +165,8 @@ a.site-bar-button {
 
 .qr-panel-inner svg {
   display: block;
+  max-width: 100%;
+  height: auto;
   background: #fff;
   padding: 0.5rem;
 }
