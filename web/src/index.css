@@ -7,12 +7,17 @@
   --accent: #0f766e;
   --error: #b45309;
   --shadow: 0 10px 24px rgba(28, 25, 23, 0.06);
-  --sans: "Noto Sans Myanmar", "Segoe UI", system-ui, sans-serif;
+  --sans: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
 
   color-scheme: light dark;
   font: 18px/1.5 var(--sans);
   color: var(--muted);
   background: var(--bg);
+}
+
+:lang(my) {
+  font-family: "Noto Sans Myanmar", var(--sans);
+  font-synthesis: none;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -314,11 +319,12 @@ a.site-bar-button {
   min-width: 0;
   margin: 0;
   font-size: var(--english-size);
+  font-weight: 400;
   line-height: 1.15;
 }
 
 .card .card-english {
-  padding-top: 0.22rem;
+  padding-top: 0;
 }
 
 .card-play {
@@ -378,7 +384,7 @@ a.site-bar-button {
 }
 
 .speech-bubble .card-english {
-  padding-top: 0.65rem;
+  padding-top: 0.4rem;
 }
 
 .speech-bubble--left {

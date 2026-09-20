@@ -32,7 +32,9 @@ function TranslationsRow({
     <div className="card-l1">
       {texts.map((text, index) => (
         <p key={`${text}-${index}`} className="card-l1-text">
-          <span dir="auto">{text}</span>
+          <span dir="auto" lang={lang}>
+            {text}
+          </span>
         </p>
       ))}
     </div>

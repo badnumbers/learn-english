@@ -53,7 +53,9 @@ export function LanguagePage() {
                 aria-pressed={isSelected}
                 onClick={() => choose(language.tag)}
               >
-                <span dir="auto">{language.nativeName}</span>
+                <span dir="auto" lang={language.tag}>
+                  {language.nativeName}
+                </span>
               </button>
             </li>
           )
