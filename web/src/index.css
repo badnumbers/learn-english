@@ -317,6 +317,10 @@ a.site-bar-button {
   line-height: 1.15;
 }
 
+.card .card-english {
+  padding-top: 0.22rem;
+}
+
 .card-play {
   --play: #16a34a;
   display: grid;
@@ -371,6 +375,10 @@ a.site-bar-button {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
+}
+
+.speech-bubble .card-english {
+  padding-top: 0.65rem;
 }
 
 .speech-bubble--left {
