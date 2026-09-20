@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 
 type PlayButtonProps = {
   audioUrl: string
@@ -20,6 +20,14 @@ function PlayIcon() {
 export function PlayButton({ audioUrl, label }: PlayButtonProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  useEffect(() => {
+    const el = audioRef.current
+    if (!el) {
+      return
+    }
+    el.load()
+  }, [audioUrl])
+
   function playAudio() {
     const el = audioRef.current
     if (!el) {
@@ -31,7 +39,7 @@ export function PlayButton({ audioUrl, label }: PlayButtonProps) {
 
   return (
     <div className="card-play-col">
-      <audio ref={audioRef} src={audioUrl} preload="none" />
+      <audio ref={audioRef} src={audioUrl} preload="auto" />
       <button
         type="button"
         className="card-play"

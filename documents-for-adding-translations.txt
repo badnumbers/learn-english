@@ -1,0 +1,350 @@
+{
+    "id": "coat",
+    "english": "coat",
+    "description": "An outer piece of clothing with sleeves that is worn over other clothes, usually for protection against cold or rain.",
+    "elements": [
+        {
+            "type": "image",
+            "file": "coat.png"
+        },
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "معطف",
+                "fa-IR": "پالتو",
+                "ps-Arab-AF": "کوټ",
+                "es-419": "abrigo",
+                "pt-BR": "casaco",
+                "uk-UA": "пальто",
+                "my-MM": "ကုတ်",
+                "so-001": "koodh"
+            }
+        },
+        {
+            "type": "english",
+            "text": "coat",
+            "audio": "coat.mp3"
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQBAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQBAAAAAAAAAA==/",
+    "_etag": "\"d100d1be-0000-1100-0000-6ab000b40000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919412
+}
+
+{
+    "id": "dress",
+    "description": "A piece of clothing that covers the top half of the body and hangs down over the legs, usually worn by women and girls.",
+    "elements": [
+        {
+            "type": "image",
+            "file": "dress.png"
+        },
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "فستان",
+                "fa-IR": "لباس",
+                "ps-Arab-AF": "جامې",
+                "es-419": "vestido",
+                "pt-BR": "vestido",
+                "uk-UA": "сукня",
+                "my-MM": "ဂါဝန်",
+                "so-001": "goon"
+            }
+        },
+        {
+            "type": "english",
+            "text": "dress",
+            "audio": "dress.mp3"
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQCAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQCAAAAAAAAAA==/",
+    "_etag": "\"d100dbbf-0000-1100-0000-6ab0014b0000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919563
+}
+
+{
+    "id": "glasses",
+    "description": "Two small pieces of special glass or plastic in a frame worn in front of the eyes to improve sight.",
+    "elements": [
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "نظّارة",
+                "fa-IR": "عینک",
+                "ps-Arab-AF": "عینکې",
+                "es-419": "lentes",
+                "pt-BR": "óculos",
+                "uk-UA": "окуляри",
+                "my-MM": "မျက်မှန်",
+                "so-001": "muraayadaha"
+            }
+        },
+        {
+            "type": "english",
+            "text": "glasses",
+            "audio": null
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQDAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQDAAAAAAAAAA==/",
+    "_etag": "\"d1006ac0-0000-1100-0000-6ab001950000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919637
+}
+
+{
+    "id": "hat",
+    "description": "A piece of clothing worn to cover the head.",
+    "elements": [
+        {
+            "type": "image",
+            "file": "hat.png"
+        },
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "قبعة",
+                "fa-IR": "کلاه",
+                "ps-Arab-AF": "خولۍ",
+                "es-419": "sombrero",
+                "pt-BR": "chapéu",
+                "uk-UA": "капелюх",
+                "my-MM": "ဦးထုပ်",
+                "so-001": "koofiyad"
+            }
+        },
+        {
+            "type": "english",
+            "text": "hat",
+            "audio": "hat.mp3"
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQEAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQEAAAAAAAAAA==/",
+    "_etag": "\"d100e6c0-0000-1100-0000-6ab001c60000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919686
+}
+
+{
+    "id": "jumper",
+    "description": "A piece of clothing, typically with long sleeves and made from wool, that is worn on the upper part of the body.",
+    "elements": [
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "سُتْرَة صُوف",
+                "fa-IR": "پلیور",
+                "ps-Arab-AF": "سویټر",
+                "es-419": "suéter",
+                "pt-BR": "suéter",
+                "uk-UA": "светр",
+                "my-MM": "ဆွယ်တာ",
+                "so-001": "funaanad"
+            }
+        },
+        {
+            "type": "english",
+            "text": "jumper",
+            "audio": null
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQFAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQFAAAAAAAAAA==/",
+    "_etag": "\"d100d1c1-0000-1100-0000-6ab002070000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919751
+}
+
+{
+    "id": "shirt",
+    "description": "A piece of clothing worn, especially by men, on the upper part of the body, made of light cloth like cotton and usually having a collar and buttons at the front.",
+    "elements": [
+        {
+            "type": "image",
+            "file": "shirt.jpg"
+        },
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "قميص",
+                "fa-IR": "پیراهن",
+                "ps-Arab-AF": "کميس",
+                "es-419": "camisa",
+                "pt-BR": "camisa",
+                "uk-UA": "сорочка",
+                "my-MM": "ရှပ်အင်္ကျီ",
+                "so-001": "shaati"
+            }
+        },
+        {
+            "type": "english",
+            "text": "shirt",
+            "audio": "shirt.mp3"
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQGAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQGAAAAAAAAAA==/",
+    "_etag": "\"d10076c3-0000-1100-0000-6ab002410000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919809
+}
+
+{
+    "id": "shoes",
+    "description": "Items of clothing worn on the feet while outdoors to protect them from rough ground, cold etc.",
+    "elements": [
+        {
+            "type": "image",
+            "file": "shoes.png"
+        },
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "حِذاء",
+                "fa-IR": "کفش",
+                "ps-Arab-AF": "بوټان",
+                "es-419": "zapatos",
+                "pt-BR": "sapatos",
+                "uk-UA": "взуття",
+                "my-MM": "ဖိနပ်",
+                "so-001": "kabo"
+            }
+        },
+        {
+            "type": "english",
+            "text": "shoes",
+            "audio": "shoes.mp3"
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQHAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQHAAAAAAAAAA==/",
+    "_etag": "\"d1008cc4-0000-1100-0000-6ab002750000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919861
+}
+
+{
+    "id": "skirt",
+    "description": "A piece of clothing that hangs from the waist and covers some or all of the legs, usually worn by women and girls.",
+    "elements": [
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "تنورة",
+                "fa-IR": "دامن",
+                "ps-Arab-AF": "سکارټ",
+                "es-419": "falda",
+                "pt-BR": "saia",
+                "uk-UA": "спідниця",
+                "my-MM": "စကတ်",
+                "so-001": "goono"
+            }
+        },
+        {
+            "type": "english",
+            "text": "skirt",
+            "audio": null
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQIAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQIAAAAAAAAAA==/",
+    "_etag": "\"d10058c5-0000-1100-0000-6ab002b10000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919921
+}
+
+{
+    "id": "socks",
+    "description": "Items of clothing, worn one on each foot and typically inside shoes, made from soft material that cover the foot and the lower part of the leg.",
+    "elements": [
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "جوارب",
+                "fa-IR": "جوراب",
+                "ps-Arab-AF": "جرابې",
+                "es-419": "medias",
+                "pt-BR": "meias",
+                "uk-UA": "шкарпетки",
+                "my-MM": "ခြေအိတ်",
+                "so-001": "sharaabaad"
+            }
+        },
+        {
+            "type": "english",
+            "text": "socks",
+            "audio": null
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQJAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQJAAAAAAAAAA==/",
+    "_etag": "\"d100c0c5-0000-1100-0000-6ab002e80000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789919976
+}
+
+{
+    "id": "t-shirt",
+    "description": "A simple piece of clothing with no buttons, and usually with short sleeves, that covers the top part of the body.",
+    "elements": [
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "تي‑شيرت",
+                "fa-IR": "تی‌شرت",
+                "ps-Arab-AF": "ټي شرټ",
+                "es-419": "camiseta",
+                "pt-BR": "camiseta",
+                "uk-UA": "футболка",
+                "my-MM": "တီရှပ်",
+                "so-001": "T-shaati"
+            }
+        },
+        {
+            "type": "english",
+            "text": "t-shirt",
+            "audio": "xxxx.mp3"
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQKAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQKAAAAAAAAAA==/",
+    "_etag": "\"d10013c6-0000-1100-0000-6ab0031e0000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789920030
+}
+
+{
+    "id": "trousers",
+    "description": "A piece of clothing that covers the lower part of the body from the waist to the feet, consisting of two cylinder-shaped parts, one for each leg, that are joined at the top.",
+    "elements": [
+        {
+            "type": "translations",
+            "translations": {
+                "ar-001": "بنطال",
+                "fa-IR": "شلوار",
+                "ps-Arab-AF": "پتلون",
+                "es-419": "pantalones",
+                "pt-BR": "calça",
+                "uk-UA": "штани",
+                "my-MM": "ဘောင်းဘီ",
+                "so-001": "surwaal"
+            }
+        },
+        {
+            "type": "english",
+            "text": "trousers",
+            "audio": null
+        }
+    ],
+    "_rid": "ik9ZAMRw8WQLAAAAAAAAAA==",
+    "_self": "dbs/ik9ZAA==/colls/ik9ZAMRw8WQ=/docs/ik9ZAMRw8WQLAAAAAAAAAA==/",
+    "_etag": "\"d10075c6-0000-1100-0000-6ab003510000\"",
+    "_attachments": "attachments/",
+    "_ts": 1789920081
+}

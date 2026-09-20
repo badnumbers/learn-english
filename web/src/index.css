@@ -7,7 +7,7 @@
   --accent: #0f766e;
   --error: #b45309;
   --shadow: 0 10px 24px rgba(28, 25, 23, 0.06);
-  --sans: "Segoe UI", system-ui, sans-serif;
+  --sans: "Noto Sans Myanmar", "Segoe UI", system-ui, sans-serif;
 
   color-scheme: light dark;
   font: 18px/1.5 var(--sans);
@@ -213,6 +213,7 @@ a.site-bar-button {
   font: inherit;
   font-size: 1.35rem;
   font-weight: 650;
+  font-synthesis: none;
   cursor: pointer;
   box-shadow: var(--shadow);
 }
