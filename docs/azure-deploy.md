@@ -19,7 +19,7 @@ This deployment’s resource names (same resource group as Cosmos and Storage):
 
 ## 1. Confirm Cosmos and Storage
 
-In Cosmos Data Explorer, confirm database `learn-english` and container `vocab` with partition key `/id`. On **Keys**, copy the primary connection string.
+In Cosmos Data Explorer, confirm database `learn-english` and container `languageitems` with partition key `/id`. One document is one language item (an ordered list of elements). On **Keys**, copy the primary connection string.
 
 On the media storage account:
 
@@ -41,7 +41,7 @@ See [blob-media.md](blob-media.md). If Cosmos is limited to selected networks, a
 
 On **Overview**, the **name** at the top is `AZURE_FUNCTIONAPP_NAME` in `deploy-api.yml` (not the hostname). Keep that env value in sync if you recreate the app.
 
-The HTTP route is `vocab`. Functions default `routePrefix` is `api`, so the live path is `/api/vocab`. Do not clear `routePrefix` in [api/host.json](../api/host.json).
+The HTTP route is `content`. Functions default `routePrefix` is `api`, so the live path is `/api/content`. Do not clear `routePrefix` in [api/host.json](../api/host.json).
 
 ## 3. Function App settings
 
@@ -50,7 +50,7 @@ Function App → **Settings** → **Environment variables** (sometimes **Configu
 - `COSMOS_CONNECTION_STRING` — Cosmos primary connection string
 - `MEDIA_BASE_URL` — blob endpoint, no trailing slash
 
-Optional (repo defaults): `COSMOS_DATABASE` = `learn-english`, `COSMOS_CONTAINER` = `vocab`, `MEDIA_IMAGES_CONTAINER` = `images`, `MEDIA_AUDIO_CONTAINER` = `audio`.
+Optional (repo defaults): `COSMOS_DATABASE` = `learn-english`, `COSMOS_CONTAINER` = `languageitems`, `MEDIA_IMAGES_CONTAINER` = `images`, `MEDIA_AUDIO_CONTAINER` = `audio`.
 
 Leave `AzureWebJobsStorage` and `FUNCTIONS_WORKER_RUNTIME` as the portal set them.
 
@@ -69,7 +69,7 @@ Repo: `https://github.com/badnumbers/learn-english.git`, branch `main`.
 
 If you have local commits that are not on GitHub yet, Azure’s workflow commit will **diverge** `main`. Rebase (or pull) so both histories are kept, then push. Do not force-push over Azure’s workflow commit.
 
-Open the generated workflow and confirm `api_location` is `""`. [web/public/staticwebapp.config.json](../web/public/staticwebapp.config.json) rewrites unknown paths to `index.html` so `/vocab` works; Vite copies that file into `dist`.
+Open the generated workflow and confirm `api_location` is `""`. [web/public/staticwebapp.config.json](../web/public/staticwebapp.config.json) rewrites unknown paths to `index.html` so `/p` and `/vocab` work; Vite copies that file into `dist`.
 
 Deployment Center on the Function App is optional. It can record “deploy from this GitHub repo” without creating login secrets, and it has **no project-path field**. Auth for Flex Consumption is the managed identity below, not a publish profile.
 
@@ -112,13 +112,13 @@ Push to `main` (or **Actions** → **Deploy API to Azure Functions** → **Run w
 
 ## 6. Link `/api` to the Function App
 
-Until this is done, the frontend loads but `/api/vocab` is Azure’s 404 HTML and the page shows “Could not load this vocabulary list.”
+Until this is done, the frontend loads but `/api/content` is Azure’s 404 HTML and the page shows “Could not load this list.”
 
 1. Static Web App → **APIs** (sometimes under **Settings**).
 2. **Production** → **Link**.
 3. Backend type **Function App** → `fapp-borderlands-learn-english` → Link.
 
-`https://<static-app>/api/vocab` is then proxied to the Function App. Direct hits to `*.azurewebsites.net` may return 401 after linking; that is expected. Confirm the Static Web App workflow still has `api_location: ""`.
+`https://<static-app>/api/content` is then proxied to the Function App. Direct hits to `*.azurewebsites.net` may return 401 after linking; that is expected. Confirm the Static Web App workflow still has `api_location: ""`.
 
 ## 7. Find the URL and check it
 
@@ -127,8 +127,8 @@ Static Web App → **Overview** → URL at the top. Current production URL:
 [https://kind-ocean-0ce852303.7.azurestaticapps.net](https://kind-ocean-0ce852303.7.azurestaticapps.net)
 
 1. That origin loads the home page.
-2. `https://kind-ocean-0ce852303.7.azurestaticapps.net/api/vocab?w=coat` returns JSON (use a slug that exists in Cosmos).
-3. `https://kind-ocean-0ce852303.7.azurestaticapps.net/vocab?w=coat,hat,shirt,shoes` shows the cards; image and audio load from blob URLs.
+2. `https://kind-ocean-0ce852303.7.azurestaticapps.net/api/content?i=coat` returns JSON (use a slug that exists in Cosmos).
+3. `https://kind-ocean-0ce852303.7.azurestaticapps.net/p?i=coat,hat,shirt,shoes` shows the items; image and audio load from blob URLs. `/vocab?w=` is an alias for the same list.
 4. The in-page **QR** code encodes the current page URL and should open the same list on a phone.
 
 If the API returns 502, check Function App logs and `COSMOS_CONNECTION_STRING`. If media 404s, check `MEDIA_BASE_URL` and container anonymous access.

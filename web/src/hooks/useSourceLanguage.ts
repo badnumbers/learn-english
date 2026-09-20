@@ -1,12 +1,17 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { readSourceLanguage, writeSourceLanguage } from '../i18n/sourceLanguage'
+import {
+  DEFAULT_SOURCE_LANGUAGE,
+  readSourceLanguage,
+  writeSourceLanguage,
+} from '../i18n/sourceLanguage'
 
 /**
  * URL `lang` wins and is persisted. Otherwise the stored choice is used for
- * display only — this hook never writes `lang` onto the URL.
+ * display only. If neither is set, Arabic (`ar-001`) is used. This hook never
+ * writes `lang` onto the URL.
  */
-export function useSourceLanguage(): string | null {
+export function useSourceLanguage(): string {
   const [searchParams] = useSearchParams()
   const urlLang = searchParams.get('lang')?.trim() || null
 
@@ -16,5 +21,5 @@ export function useSourceLanguage(): string | null {
     }
   }, [urlLang])
 
-  return urlLang ?? readSourceLanguage()
+  return urlLang ?? readSourceLanguage() ?? DEFAULT_SOURCE_LANGUAGE
 }

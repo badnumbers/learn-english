@@ -4,12 +4,20 @@ using Microsoft.Extensions.Configuration;
 namespace Api;
 
 /// <summary>
-/// Public blob URLs: {MEDIA_BASE_URL}/{container}/{fileName}
+/// Public blob URLs: {MEDIA_BASE_URL}/{container}/{blobName}
+/// blobName is a file name, optionally under up to two directory segments
+/// (for example conversations/at-the-shop/01.mp3).
 /// </summary>
 public sealed class MediaUrlResolver
 {
-    private static readonly Regex FileName = new(
+    private const int MaxDirectorySegments = 2;
+
+    private static readonly Regex FileSegment = new(
         @"^[a-z0-9][a-z0-9._-]*\.[a-z0-9]+$",
+        RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+    private static readonly Regex DirectorySegment = new(
+        @"^[a-z0-9][a-z0-9_-]*$",
         RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     private readonly string? _baseUrl;
@@ -27,24 +35,53 @@ public sealed class MediaUrlResolver
             : config["MEDIA_AUDIO_CONTAINER"]!.Trim().Trim('/');
     }
 
-    public string? ImageUrl(string? fileName) => Combine(_imagesContainer, fileName);
+    public string? ImageUrl(string? blobName) => Combine(_imagesContainer, blobName);
 
-    public string? AudioUrl(string? fileName) => Combine(_audioContainer, fileName);
+    public string? AudioUrl(string? blobName) => Combine(_audioContainer, blobName);
 
-    private string? Combine(string container, string? fileName)
+    private string? Combine(string container, string? blobName)
     {
         if (string.IsNullOrWhiteSpace(_baseUrl)
-            || fileName is null
-            || !IsSafeFileName(fileName))
+            || blobName is null
+            || !IsSafeBlobName(blobName))
         {
             return null;
         }
 
-        return $"{_baseUrl}/{container}/{fileName.Trim()}";
+        return $"{_baseUrl}/{container}/{blobName.Trim().Trim('/')}";
     }
 
-    internal static bool IsSafeFileName(string? fileName) =>
-        !string.IsNullOrWhiteSpace(fileName) && FileName.IsMatch(fileName.Trim());
+    internal static bool IsSafeBlobName(string? blobName)
+    {
+        if (string.IsNullOrWhiteSpace(blobName))
+        {
+            return false;
+        }
+
+        var value = blobName.Trim().Trim('/');
+        if (value.Contains('\\', StringComparison.Ordinal)
+            || value.Contains("..", StringComparison.Ordinal)
+            || value.Contains(':', StringComparison.Ordinal))
+        {
+            return false;
+        }
+
+        var parts = value.Split('/');
+        if (parts.Length == 0 || parts.Length > MaxDirectorySegments + 1)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < parts.Length - 1; i++)
+        {
+            if (!DirectorySegment.IsMatch(parts[i]))
+            {
+                return false;
+            }
+        }
+
+        return FileSegment.IsMatch(parts[^1]);
+    }
 
     private static string? TrimTrailingSlash(string? value)
     {

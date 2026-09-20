@@ -1,5 +1,7 @@
 const STORAGE_KEY = 'learn-english.lang'
 
+export const DEFAULT_SOURCE_LANGUAGE = 'ar-001'
+
 export function readSourceLanguage(): string | null {
   try {
     const value = localStorage.getItem(STORAGE_KEY)?.trim()

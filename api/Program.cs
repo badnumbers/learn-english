@@ -22,6 +22,6 @@ builder.Services.AddSingleton(_ =>
 });
 
 builder.Services.AddSingleton<MediaUrlResolver>();
-builder.Services.AddSingleton<VocabRepository>();
+builder.Services.AddSingleton<ContentRepository>();
 
 builder.Build().Run();

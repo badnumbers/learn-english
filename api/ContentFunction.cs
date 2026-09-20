@@ -5,23 +5,23 @@ using Microsoft.Extensions.Logging;
 
 namespace Api;
 
-public sealed class VocabFunction
+public sealed class ContentFunction
 {
-    private readonly VocabRepository _repository;
-    private readonly ILogger<VocabFunction> _logger;
+    private readonly ContentRepository _repository;
+    private readonly ILogger<ContentFunction> _logger;
 
-    public VocabFunction(VocabRepository repository, ILogger<VocabFunction> logger)
+    public ContentFunction(ContentRepository repository, ILogger<ContentFunction> logger)
     {
         _repository = repository;
         _logger = logger;
     }
 
-    [Function("Vocab")]
+    [Function("Content")]
     public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "vocab")] HttpRequest req,
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "content")] HttpRequest req,
         CancellationToken cancellationToken)
     {
-        var slugs = VocabRepository.ParseSlugs(req.Query["w"]);
+        var slugs = ContentRepository.ParseSlugs(req.Query["i"]);
 
         try
         {
@@ -30,8 +30,8 @@ public sealed class VocabFunction
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Failed to load vocabulary for {Count} slug(s).", slugs.Count);
-            return new ObjectResult(new { error = "Could not load vocabulary." })
+            _logger.LogError(ex, "Failed to load content for {Count} slug(s).", slugs.Count);
+            return new ObjectResult(new { error = "Could not load content." })
             {
                 StatusCode = StatusCodes.Status502BadGateway
             };

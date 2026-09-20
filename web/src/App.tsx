@@ -1,8 +1,8 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { AppFrame } from './components/AppFrame'
+import { ContentPage } from './pages/ContentPage'
 import { HomePage } from './pages/HomePage'
 import { LanguagePage } from './pages/LanguagePage'
-import { VocabPage } from './pages/VocabPage'
 
 export default function App() {
   return (
@@ -10,7 +10,9 @@ export default function App() {
       <AppFrame>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/vocab" element={<VocabPage />} />
+          <Route path="/p" element={<ContentPage />} />
+          <Route path="/vocab" element={<ContentPage />} />
+          <Route path="/conversation" element={<Navigate to="/p" replace />} />
           <Route path="/language" element={<LanguagePage />} />
         </Routes>
       </AppFrame>

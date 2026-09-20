@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { fetchVocab } from '../api/vocab'
-import { VocabCard } from '../components/VocabCard'
+import { useLocation, useSearchParams } from 'react-router-dom'
+import { fetchContent } from '../api/content'
+import { LanguageItem } from '../components/LanguageItem'
 import { useSourceLanguage } from '../hooks/useSourceLanguage'
-import type { VocabItem } from '../types'
+import type { LanguageItem as LanguageItemModel } from '../types'
 
-export function VocabPage() {
+export function ContentPage() {
+  const location = useLocation()
   const [searchParams] = useSearchParams()
-  const wordsQuery = searchParams.get('w') ?? ''
+  const isVocabAlias = location.pathname === '/vocab'
+  const itemsQuery = isVocabAlias
+    ? (searchParams.get('w') ?? '')
+    : (searchParams.get('i') ?? '')
   const lang = useSourceLanguage()
-  const [items, setItems] = useState<VocabItem[] | null>(null)
+  const [items, setItems] = useState<LanguageItemModel[] | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!wordsQuery.trim()) {
+    if (!itemsQuery.trim()) {
       setItems([])
       setError(null)
       return
@@ -23,7 +27,7 @@ export function VocabPage() {
     setItems(null)
     setError(null)
 
-    fetchVocab(wordsQuery, controller.signal)
+    fetchContent(itemsQuery, controller.signal)
       .then((data) => {
         setItems(data.items)
       })
@@ -31,19 +35,22 @@ export function VocabPage() {
         if (err instanceof DOMException && err.name === 'AbortError') {
           return
         }
-        setError('Could not load this vocabulary list.')
+        setError('Could not load this list.')
         setItems([])
       })
 
     return () => controller.abort()
-  }, [wordsQuery])
+  }, [itemsQuery])
 
-  if (!wordsQuery.trim()) {
+  const title = isVocabAlias ? 'Vocabulary' : 'Study'
+  const exampleQuery = isVocabAlias ? '?w=apple,run' : '?i=hat,shop-hello'
+
+  if (!itemsQuery.trim()) {
     return (
       <section className="page">
-        <h1>Vocabulary</h1>
+        <h1>{title}</h1>
         <p>
-          Add words to the link with <code>?w=apple,run</code>.
+          Add language items to the link with <code>{exampleQuery}</code>.
         </p>
       </section>
     )
@@ -51,20 +58,20 @@ export function VocabPage() {
 
   return (
     <section className="page">
-      <h1>Vocabulary</h1>
+      <h1>{title}</h1>
       {error ? <p className="status status--error">{error}</p> : null}
       {items === null ? <p className="status">Loading…</p> : null}
       {items && items.length > 0 ? (
-        <ol className="vocab-list">
+        <ol className="content-list">
           {items.map((item) => (
             <li key={item.id}>
-              <VocabCard item={item} lang={lang} />
+              <LanguageItem item={item} lang={lang} />
             </li>
           ))}
         </ol>
       ) : null}
       {items && items.length === 0 && !error ? (
-        <p className="status">No words in this list.</p>
+        <p className="status">No items in this list.</p>
       ) : null}
     </section>
   )

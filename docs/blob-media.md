@@ -1,19 +1,23 @@
 # Blob media (images and audio)
 
-Cosmos `files` maps a kind of media to a **blob file name**. The API builds public URLs from `MEDIA_BASE_URL` and the matching container:
+Language item elements name blobs; the API builds public URLs from `MEDIA_BASE_URL` and the matching container:
 
 ```
-{MEDIA_BASE_URL}/{container}/{fileName}
+{MEDIA_BASE_URL}/{container}/{blobName}
 https://YOUR_ACCOUNT.blob.core.windows.net/images/shirt.jpg
 https://YOUR_ACCOUNT.blob.core.windows.net/audio/shirt.mp3
+https://YOUR_ACCOUNT.blob.core.windows.net/audio/conversations/at-the-shop/01.mp3
 ```
 
-| `files` key | Container (default) | Example value |
-| --- | --- | --- |
-| `image` | `images` | `shirt.jpg` |
-| `audio` | `audio` | `shirt.mp3` |
+| Element `type` | Field | Container (default) | Example value |
+| --- | --- | --- | --- |
+| `image` | `file` | `images` | `shirt.jpg` |
+| `english` | `audio` | `audio` | `shirt.mp3` |
+| `english` | `audio` | `audio` | `conversations/at-the-shop/01.mp3` |
 
-Omit a key when that media does not exist. File names must be a single segment with an extension (`shirt.jpg`, `look-after.svg`). No host, path, or `..`. The name does not have to equal the document `id`.
+Omit `audio` when there is no clip. Each path segment must be lowercase letters, digits, and hyphen; the last segment is a file name with an extension (`shirt.jpg`, `look-after.svg`, `01.mp3`). No host, `..`, or `\\`. The name does not have to equal the document `id`. Up to two directory segments are allowed.
+
+Older documents may still use `files.image` / `files.audio` instead of `elements`. The API maps those on read the same way.
 
 Configure `MEDIA_BASE_URL` in `api/local.settings.json` and in the Function App settings. Optional: `MEDIA_IMAGES_CONTAINER`, `MEDIA_AUDIO_CONTAINER`.
 
