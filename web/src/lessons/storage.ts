@@ -92,7 +92,7 @@ export type LessonDateGroup = {
 }
 
 export function groupLessonsByDate(lessons: LessonVisit[]): LessonDateGroup[] {
-  const sorted = [...lessons].sort((a, b) => b.firstSeen - a.firstSeen)
+  const sorted = [...lessons].sort((a, b) => a.firstSeen - b.firstSeen)
   const groups: LessonDateGroup[] = []
   const formatter = new Intl.DateTimeFormat(undefined, {
     weekday: 'long',
@@ -117,5 +117,6 @@ export function groupLessonsByDate(lessons: LessonVisit[]): LessonDateGroup[] {
     })
   }
 
+  groups.reverse()
   return groups
 }
