@@ -16,7 +16,9 @@ Put the English on an `english` element. Leave `translations` empty, or already 
 
 `context` provides information about the social (and possibly other) context, for example, the genders and relative ages of the speakers.
 
-Neither field is shown in the app. They only guide translation. If two turns use the same English but different speakers, say so in `context`; some L1s will still differ. Keep `tags` (a string array for finding documents in Cosmos) if it is present; the app does not use it.
+`translationNotes` says how to choose an L1 when several words could gloss that meaning: a preferred term, an allowed fallback, or the word the public actually uses.
+
+None of these fields is shown in the app. They only guide translation. If two turns use the same English but different speakers, say so in `context`; some L1s will still differ. Keep `tags` (a string array for finding documents in Cosmos) if it is present; the app does not use it.
 
 Each L1 must still make sense **in isolation**: a fair translation of that English if the language item stood alone (for example in a later quiz). Do not store a second, more literal map. The one `translations` object is the student-facing gloss.
 

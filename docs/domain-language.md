@@ -28,4 +28,4 @@ Container chrome for a **language item**, not for an element. Closed set: `bubbl
 
 ## Authoring notes
 
-`description`, `context`, and `tags` on a language item are authoring notes. `tags` is a string array so documents can be found in Cosmos; the app does not read or show it. Extra JSON properties must not be stripped if a document is written back.
+`description`, `context`, `translationNotes`, and `tags` on a language item are authoring notes. `description` is the meaning of the English. `context` is the social situation, such as who is speaking and to whom. `translationNotes` is how to choose an L1 when several words could gloss that meaning. `tags` is a string array so documents can be found in Cosmos. The app does not read or show these. Extra JSON properties must not be stripped if a document is written back.

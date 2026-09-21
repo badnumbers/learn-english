@@ -14,6 +14,9 @@ internal sealed class ContentDocument
     [JsonProperty("context")]
     public string? Context { get; set; }
 
+    [JsonProperty("translationNotes")]
+    public string? TranslationNotes { get; set; }
+
     [JsonProperty("tags")]
     public List<string>? Tags { get; set; }
 

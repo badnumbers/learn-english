@@ -25,7 +25,9 @@ Read the target tags from [`docs/bcp47-translations.md`](../../../docs/bcp47-tra
 
 `context` provides information about the social (and possibly other) context, for example, the genders and relative ages of the speakers.
 
-The app does not show `description`, `context`, or `tags`. Keep them. `tags` is a string array for finding documents in Cosmos; do not invent or edit it unless asked. Keep Cosmos system properties (`_rid`, `_self`, `_etag`, `_attachments`, `_ts`) and any other extra fields.
+`translationNotes` says how to choose an L1 when several words could gloss that meaning: a preferred term, an allowed fallback, or the word the public actually uses. It does not change the sense, and it does not describe who is speaking.
+
+The app does not show `description`, `context`, `translationNotes`, or `tags`. Keep them. `tags` is a string array for finding documents in Cosmos; do not invent or edit it unless asked. Keep Cosmos system properties (`_rid`, `_self`, `_etag`, `_attachments`, `_ts`) and any other extra fields.
 
 ## When to stop and ask
 
@@ -49,7 +51,7 @@ That is a phrase equivalent, not a word-for-word calque. A stock equivalent of t
 - Avoid strongly dialect-specific wording unless it is also widely understood.
 - Choose the simplest common form suitable for beginners.
 - Match the English register as far as the L1 allows (informal English → informal L1).
-- Use `description` to pick the sense. Use `context` only for agreement and address (speaker vs addressee gender, age, stranger vs familiar). If the English does not inflect, the L1 still may. Do not use `context` to swap in a shorter reply that drops the English meaning.
+- Use `description` to pick the sense. Use `translationNotes` to choose among L1s for that sense. Use `context` only for agreement and address (speaker vs addressee gender, age, stranger vs familiar). If the English does not inflect, the L1 still may. Do not use `context` or `translationNotes` to swap in a shorter reply that drops the English meaning.
 - Two English lines may share an L1 only when both English lines really mean that same L1. Do not collapse “Nice to meet you” into “me too,” or similar.
 - For pairs (shoes, glasses), use the idiomatic modern form.
 - If no single common term exists, use a short phrase of at most 10 words and mention the English gloss in the report.
