@@ -25,7 +25,7 @@ Read the target tags from [`docs/bcp47-translations.md`](../../../docs/bcp47-tra
 
 `context` provides information about the social (and possibly other) context, for example, the genders and relative ages of the speakers.
 
-The app does not show `description` or `context`. Keep them. Keep Cosmos system properties (`_rid`, `_self`, `_etag`, `_attachments`, `_ts`) and any other extra fields.
+The app does not show `description`, `context`, or `tags`. Keep them. `tags` is a string array for finding documents in Cosmos; do not invent or edit it unless asked. Keep Cosmos system properties (`_rid`, `_self`, `_etag`, `_attachments`, `_ts`) and any other extra fields.
 
 ## When to stop and ask
 

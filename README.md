@@ -68,7 +68,7 @@ A conversation turn is the same shape. Optional `style` is container chrome (`bu
 
 Share that dialogue as `/learn?items=shop-hello,shop-want-bread&title=at-the-shop`. A named conversation slug and clustered alternatives are a later document type.
 
-`description` is English gloss used when collecting translations. `context` is further authoring notes. The app does not show either and must not strip them (or other extra properties) if a document is written back. Element `file` / `audio` values are blob names (see [`docs/blob-media.md`](docs/blob-media.md)). Record or export speech as mono MP3 ([`speech-mp3.md`](speech-mp3.md)). Translation-key conventions belong in [`docs/`](docs/).
+`description` is English gloss used when collecting translations. `context` is further authoring notes. `tags` is a string array for finding documents in Cosmos. The app does not show these and must not strip them (or other extra properties) if a document is written back. Element `file` / `audio` values are blob names (see [`docs/blob-media.md`](docs/blob-media.md)). Record or export speech as mono MP3 ([`speech-mp3.md`](speech-mp3.md)). Translation-key conventions belong in [`docs/`](docs/).
 
 Documents that still use top-level `english`, `translations`, and `files` (and have no `elements`) are read as image, then translations, then one English phrase. New authoring should use `elements` only.
 
