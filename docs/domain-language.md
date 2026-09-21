@@ -4,7 +4,7 @@ Terms used in this project. Prefer these names in code, docs, and Cosmos documen
 
 ## Language item
 
-One Cosmos document in the `languageitems` container, and one container on a study page. Its `id` is the slug in the URL. A language item is not a list of other language items.
+One Cosmos document in the `languageitems` container. Its `id` is the slug in the URL (`items` or `title`). On a study page it usually renders as a card or speech bubble. A language item used as `title` is a heading only (English and L1), not a list of other language items.
 
 ## Element
 
@@ -20,7 +20,7 @@ Unknown `type` values are ignored. Do not infer type from whichever keys are pre
 
 ## Page
 
-An ordered list of language item ids from the URL (`/p?i=hat,shop-hello`). The vocabulary alias `/vocab?w=` is the same list. The page does not store that list in Cosmos.
+An ordered list of language item ids from the URL (`/learn?items=hat,shop-hello`). Optional `title` is another language item id used only as the page heading (English and L1), not as a row in that list. The page does not store that list in Cosmos. The student’s home page lists each `title` the first time this browser opened it.
 
 ## Style
 

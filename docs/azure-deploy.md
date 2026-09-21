@@ -69,7 +69,7 @@ Repo: `https://github.com/badnumbers/learn-english.git`, branch `main`.
 
 If you have local commits that are not on GitHub yet, Azure’s workflow commit will **diverge** `main`. Rebase (or pull) so both histories are kept, then push. Do not force-push over Azure’s workflow commit.
 
-Open the generated workflow and confirm `api_location` is `""`. [web/public/staticwebapp.config.json](../web/public/staticwebapp.config.json) rewrites unknown paths to `index.html` so `/p` and `/vocab` work; Vite copies that file into `dist`.
+Open the generated workflow and confirm `api_location` is `""`. [web/public/staticwebapp.config.json](../web/public/staticwebapp.config.json) rewrites unknown paths to `index.html` so `/learn` works; Vite copies that file into `dist`.
 
 Deployment Center on the Function App is optional. It can record “deploy from this GitHub repo” without creating login secrets, and it has **no project-path field**. Auth for Flex Consumption is the managed identity below, not a publish profile.
 
@@ -128,7 +128,7 @@ Static Web App → **Overview** → URL at the top. Current production URL:
 
 1. That origin loads the home page.
 2. `https://kind-ocean-0ce852303.7.azurestaticapps.net/api/content?i=coat` returns JSON (use a slug that exists in Cosmos).
-3. `https://kind-ocean-0ce852303.7.azurestaticapps.net/p?i=coat,hat,shirt,shoes` shows the items; image and audio load from blob URLs. `/vocab?w=` is an alias for the same list.
+3. `https://kind-ocean-0ce852303.7.azurestaticapps.net/learn?items=coat,hat,shirt,shoes&title=clothing` shows the items; image and audio load from blob URLs.
 4. The in-page **QR** code encodes the current page URL and should open the same list on a phone.
 
 If the API returns 502, check Function App logs and `COSMOS_CONNECTION_STRING`. If media 404s, check `MEDIA_BASE_URL` and container anonymous access.

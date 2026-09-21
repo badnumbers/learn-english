@@ -180,30 +180,73 @@ a.site-bar-button {
   padding: 1.5rem 1.25rem 3rem;
 }
 
-.page--home .example-label {
-  margin: 1.5rem 0 0.4rem;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.page-heading {
+  --heading-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin: 0 0 0.75rem;
 }
 
-.example-url {
-  display: block;
+.page-heading-english {
+  margin: 0;
+  font-size: var(--heading-size);
+}
+
+.page-heading-l1 {
+  margin: 0.2rem 0 0;
+  font-size: calc(var(--heading-size) * 0.8);
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.lesson-group {
+  margin-top: 1.5rem;
+}
+
+.lesson-date {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--muted);
+}
+
+.lesson-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.lesson-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 100%;
   padding: 0.85rem 1rem;
-  margin-bottom: 1.5rem;
-  overflow-x: auto;
-  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
+  background: var(--card);
   color: var(--ink);
+  text-decoration: none;
+  box-shadow: var(--shadow);
 }
 
-.notes {
-  padding-left: 1.2rem;
+.lesson-link:hover,
+.lesson-link:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
-.notes li {
-  margin-bottom: 0.6rem;
+.lesson-english {
+  font-size: 1.35rem;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+}
+
+.lesson-l1 {
+  font-size: calc(1.35rem * 0.8);
+  line-height: 1.35;
+  color: var(--muted);
+  font-weight: 400;
 }
 
 .language-list {

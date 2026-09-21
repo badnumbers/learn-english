@@ -1,6 +1,6 @@
 # Learn English
 
-Share a study list with a URL. Students open `/p?i=hat,shop-hello,shop-want-bread` (or the vocabulary alias `/vocab?w=apple,look-after,run`). Each id is one **language item** (one Cosmos document). Optional `lang` (a BCP 47 tag such as `ar-EG`) overrides the translation shown and is saved in the browser. Students can also pick a language from the globe in the header; that choice is remembered locally and is not written onto a language-neutral link. Without `lang` or a stored choice, the app uses Arabic (`ar-001`).
+Share a study list with a URL. Students open `/learn?items=hat,shop-hello,shop-want-bread&title=clothing`. Each id in `items` is one **language item** (one Cosmos document). Optional `title` is another language item id used as the page heading (English, with the student’s L1 underneath). Optional `lang` (a BCP 47 tag such as `ar-EG`) overrides the translation shown and is saved in the browser. Students can also pick a language from the globe in the header; that choice is remembered locally and is not written onto a language-neutral link. Without `lang` or a stored choice, the app uses Arabic (`ar-001`). The home page (`/`) lists each titled lesson the first time this browser opened it.
 
 Terms: [`docs/domain-language.md`](docs/domain-language.md).
 
@@ -22,7 +22,7 @@ Terminal 2 — web app:
 cd web && npm install && npm run dev
 ```
 
-Open the web app at [http://localhost:5173](http://localhost:5173). A study list: [http://localhost:5173/p?i=cat,look-after](http://localhost:5173/p?i=cat,look-after). The vocabulary alias still works: [http://localhost:5173/vocab?w=cat,look-after](http://localhost:5173/vocab?w=cat,look-after). Add `&lang=ar-EG` only when you want that link to force one language.
+Open the web app at [http://localhost:5173](http://localhost:5173). A study list: [http://localhost:5173/learn?items=cat,look-after&title=clothing](http://localhost:5173/learn?items=cat,look-after&title=clothing). Add `&lang=ar-EG` only when you want that link to force one language.
 
 The Vite dev server proxies `/api` to `http://localhost:7071`.
 
@@ -66,12 +66,12 @@ A conversation turn is the same shape. Optional `style` is container chrome (`bu
 }
 ```
 
-Share that dialogue as `/p?i=shop-hello,shop-want-bread`. A named conversation slug and clustered alternatives are a later document type.
+Share that dialogue as `/learn?items=shop-hello,shop-want-bread&title=at-the-shop`. A named conversation slug and clustered alternatives are a later document type.
 
-`description` is English gloss used when collecting translations. `context` is further authoring notes. The app does not show either and must not strip them (or other extra properties) if a document is written back. Element `file` / `audio` values are blob names (see [`docs/blob-media.md`](docs/blob-media.md)). Translation-key conventions belong in [`docs/`](docs/).
+`description` is English gloss used when collecting translations. `context` is further authoring notes. The app does not show either and must not strip them (or other extra properties) if a document is written back. Element `file` / `audio` values are blob names (see [`docs/blob-media.md`](docs/blob-media.md)). Record or export speech as mono MP3 ([`speech-mp3.md`](speech-mp3.md)). Translation-key conventions belong in [`docs/`](docs/).
 
 Documents that still use top-level `english`, `translations`, and `files` (and have no `elements`) are read as image, then translations, then one English phrase. New authoring should use `elements` only.
 
 ## Deploy to Azure
 
-Production is a Standard Static Web App with a linked .NET 10 Flex Consumption Function App (Cosmos and Blob Storage stay as they are). Students use the Static Web App URL, for example [https://kind-ocean-0ce852303.7.azurestaticapps.net/p?i=coat,hat,shirt,shoes](https://kind-ocean-0ce852303.7.azurestaticapps.net/p?i=coat,hat,shirt,shoes). Full walkthrough: [`docs/azure-deploy.md`](docs/azure-deploy.md).
+Production is a Standard Static Web App with a linked .NET 10 Flex Consumption Function App (Cosmos and Blob Storage stay as they are). Students use the Static Web App URL, for example [https://kind-ocean-0ce852303.7.azurestaticapps.net/learn?items=coat,hat,shirt,shoes&title=clothing](https://kind-ocean-0ce852303.7.azurestaticapps.net/learn?items=coat,hat,shirt,shoes&title=clothing). Full walkthrough: [`docs/azure-deploy.md`](docs/azure-deploy.md).

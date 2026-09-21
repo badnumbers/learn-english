@@ -1,35 +1,48 @@
 import { useEffect, useState } from 'react'
-import { useLocation, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { fetchContent } from '../api/content'
 import { LanguageItem } from '../components/LanguageItem'
+import { PageHeading } from '../components/PageHeading'
 import { useSourceLanguage } from '../hooks/useSourceLanguage'
+import { headingFromItem } from '../lessons/heading'
+import { normalizeItemIds, recordLesson } from '../lessons/storage'
 import type { LanguageItem as LanguageItemModel } from '../types'
 
 export function ContentPage() {
-  const location = useLocation()
   const [searchParams] = useSearchParams()
-  const isVocabAlias = location.pathname === '/vocab'
-  const itemsQuery = isVocabAlias
-    ? (searchParams.get('w') ?? '')
-    : (searchParams.get('i') ?? '')
+  const itemsQuery = normalizeItemIds(searchParams.get('items') ?? '')
+  const titleId = searchParams.get('title')?.trim() ?? ''
   const lang = useSourceLanguage()
   const [items, setItems] = useState<LanguageItemModel[] | null>(null)
+  const [titleItem, setTitleItem] = useState<LanguageItemModel | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (!itemsQuery.trim()) {
+    if (!itemsQuery) {
       setItems([])
+      setTitleItem(null)
       setError(null)
       return
     }
 
     const controller = new AbortController()
     setItems(null)
+    setTitleItem(null)
     setError(null)
 
-    fetchContent(itemsQuery, controller.signal)
-      .then((data) => {
+    const itemsRequest = fetchContent(itemsQuery, controller.signal)
+    const titleRequest = titleId
+      ? fetchContent(titleId, controller.signal).catch(() => null)
+      : Promise.resolve(null)
+
+    Promise.all([itemsRequest, titleRequest])
+      .then(([data, titleData]) => {
         setItems(data.items)
+        const heading = titleData?.items[0] ?? null
+        setTitleItem(heading?.id === titleId ? heading : null)
+        if (titleId && data.items.length > 0) {
+          recordLesson(titleId, itemsQuery)
+        }
       })
       .catch((err: unknown) => {
         if (err instanceof DOMException && err.name === 'AbortError') {
@@ -40,17 +53,17 @@ export function ContentPage() {
       })
 
     return () => controller.abort()
-  }, [itemsQuery])
+  }, [itemsQuery, titleId])
 
-  const title = isVocabAlias ? 'Vocabulary' : 'Study'
-  const exampleQuery = isVocabAlias ? '?w=apple,run' : '?i=hat,shop-hello'
+  const heading = headingFromItem(titleItem, lang, titleId || 'Study')
 
-  if (!itemsQuery.trim()) {
+  if (!itemsQuery) {
     return (
       <section className="page">
-        <h1>{title}</h1>
+        <h1>Study</h1>
         <p>
-          Add language items to the link with <code>{exampleQuery}</code>.
+          Add language items to the link with{' '}
+          <code>?items=hat,shop-hello</code>.
         </p>
       </section>
     )
@@ -58,7 +71,7 @@ export function ContentPage() {
 
   return (
     <section className="page">
-      <h1>{title}</h1>
+      <PageHeading english={heading.english} l1={heading.l1} lang={lang} />
       {error ? <p className="status status--error">{error}</p> : null}
       {items === null ? <p className="status">Loading…</p> : null}
       {items && items.length > 0 ? (

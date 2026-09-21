@@ -1,48 +1,102 @@
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { fetchContent } from '../api/content'
+import { useSourceLanguage } from '../hooks/useSourceLanguage'
+import { headingFromItem } from '../lessons/heading'
+import {
+  groupLessonsByDate,
+  lessonHref,
+  readLessons,
+  type LessonVisit,
+} from '../lessons/storage'
+import type { LanguageItem } from '../types'
+
 export function HomePage() {
+  const lang = useSourceLanguage()
+  const location = useLocation()
+  const lessons = useMemo(() => readLessons(), [location.key])
+  const groups = useMemo(() => groupLessonsByDate(lessons), [lessons])
+  const [titles, setTitles] = useState<Map<string, LanguageItem> | null>(
+    lessons.length === 0 ? new Map() : null,
+  )
+
+  useEffect(() => {
+    const titleIds = [...new Set(lessons.map((lesson) => lesson.titleId))]
+    if (titleIds.length === 0) {
+      setTitles(new Map())
+      return
+    }
+
+    const controller = new AbortController()
+    fetchContent(titleIds.join(','), controller.signal)
+      .then((data) => {
+        const next = new Map<string, LanguageItem>()
+        for (const item of data.items) {
+          next.set(item.id, item)
+        }
+        setTitles(next)
+      })
+      .catch((err: unknown) => {
+        if (err instanceof DOMException && err.name === 'AbortError') {
+          return
+        }
+        setTitles(new Map())
+      })
+
+    return () => controller.abort()
+  }, [lessons])
+
+  if (lessons.length === 0) {
+    return (
+      <section className="page page--home">
+        <h1>Lessons</h1>
+        <p className="status">Open a class link to see it here.</p>
+      </section>
+    )
+  }
+
   return (
     <section className="page page--home">
-      <h1>Study links</h1>
-      <p>
-        Share a link that opens a list of language items. Each id in the URL is
-        one Cosmos document; the page is only that ordered list.
-      </p>
-      <p className="example-label">Study list</p>
-      <code className="example-url">/p?i=hat,shop-hello,shop-want-bread</code>
-      <p className="example-label">Vocabulary alias</p>
-      <code className="example-url">/vocab?w=apple,look-after,run</code>
-      <ul className="notes">
-        <li>
-          Use lowercase slugs. <code>i</code> (and the vocabulary alias{' '}
-          <code>w</code>) is a comma-separated list of language item ids.
-          Phrases use hyphens: <code>look-after</code>.
-        </li>
-        <li>
-          Optional <code>lang</code> is a BCP 47 tag (for example{' '}
-          <code>ar-EG</code>) that picks one translation and is saved in the
-          browser. Students can also choose a language from the globe in the
-          header. That choice is remembered locally and is not written onto a
-          link that has no <code>lang</code>. Without either, Arabic (
-          <code>ar-001</code>) is used.
-        </li>
-        <li>
-          Language items live in the <code>languageitems</code> container. Each
-          document <code>id</code> must match the slug. Use partition key{' '}
-          <code>/id</code>. One document is one language item: an ordered{' '}
-          <code>elements</code> list. A named conversation or a clustered group
-          of alternatives is a later document type, not a list nested inside a
-          language item.
-        </li>
-        <li>
-          Element types: <code>image</code> (<code>file</code> blob name such as{' '}
-          <code>shirt.jpg</code>), <code>translations</code> (BCP 47 keys),{' '}
-          <code>english</code> (<code>text</code> and optional <code>audio</code>{' '}
-          such as <code>conversations/at-the-shop/01.mp3</code>). Optional
-          language item <code>style</code> is <code>bubble-left</code> or{' '}
-          <code>bubble-right</code>; omit for a card.{' '}
-          <code>description</code> and <code>context</code> are authoring notes
-          and are not shown on the list.
-        </li>
-      </ul>
+      <h1>Lessons</h1>
+      {groups.map((group) => (
+        <section key={group.key} className="lesson-group">
+          <h2 className="lesson-date">{group.label}</h2>
+          <ul className="lesson-list">
+            {group.lessons.map((lesson) => (
+              <li key={lesson.titleId}>
+                <LessonRow
+                  lesson={lesson}
+                  item={titles?.get(lesson.titleId) ?? null}
+                  lang={lang}
+                />
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </section>
+  )
+}
+
+function LessonRow({
+  lesson,
+  item,
+  lang,
+}: {
+  lesson: LessonVisit
+  item: LanguageItem | null
+  lang: string
+}) {
+  const heading = headingFromItem(item, lang, lesson.titleId)
+
+  return (
+    <Link className="lesson-link" to={lessonHref(lesson)}>
+      <span className="lesson-english">{heading.english}</span>
+      {heading.l1 ? (
+        <span className="lesson-l1" dir="auto" lang={lang}>
+          {heading.l1}
+        </span>
+      ) : null}
+    </Link>
   )
 }
