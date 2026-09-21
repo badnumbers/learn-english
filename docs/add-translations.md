@@ -18,6 +18,8 @@ Put the English on an `english` element. Leave `translations` empty, or already 
 
 Neither field is shown in the app. They only guide translation. If two turns use the same English but different speakers, say so in `context`; some L1s will still differ.
 
+Each L1 must still make sense **in isolation**: a fair translation of that English if the language item stood alone (for example in a later quiz). Do not store a second, more literal map. The one `translations` object is the student-facing gloss.
+
 ## After translation
 
 Read the agent’s notes (gender, formality, names, unsure terms), then copy each document back into the `languageitems` container.
