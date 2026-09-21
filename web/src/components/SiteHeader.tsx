@@ -6,6 +6,31 @@ type SiteHeaderProps = {
   onQrClick: () => void
 }
 
+function HomeIcon() {
+  return (
+    <svg
+      className="site-bar-icon"
+      viewBox="0 0 24 24"
+      width="1.35rem"
+      height="1.35rem"
+      aria-hidden="true"
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        d="M4 11.5 12 4l8 7.5"
+      />
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        d="M6 10.5V20h12V10.5"
+      />
+    </svg>
+  )
+}
+
 function LanguageIcon() {
   return (
     <svg
@@ -56,6 +81,14 @@ export function SiteHeader({ qrOpen, onQrClick }: SiteHeaderProps) {
           Learn English
         </Link>
         <div className="site-bar-actions">
+          <Link
+            className="site-bar-button"
+            to="/"
+            aria-label="Home"
+            aria-current={location.pathname === '/' ? 'page' : undefined}
+          >
+            <HomeIcon />
+          </Link>
           <Link
             className="site-bar-button"
             to="/language"
