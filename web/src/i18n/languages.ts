@@ -16,6 +16,7 @@ export const SOURCE_LANGUAGES: readonly SourceLanguage[] = [
   { tag: 'so-001', nativeName: 'Soomaali' },
   { tag: 'tr-TR', nativeName: 'Türkçe' },
   { tag: 'ti-ER', nativeName: 'ትግርኛ' },
+  { tag: 'am-ET', nativeName: 'አማርኛ' },
 ]
 
 export function matchingLanguage(tag: string | null): SourceLanguage | null {
