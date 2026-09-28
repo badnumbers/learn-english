@@ -17,7 +17,7 @@ Documents to be provided in a JSON array in `documents-for-adding-translations.j
 
 Each array member is one **language item**. Fill the `translations` object on each `translations` element. Do not invent extra elements.
 
-Read the target tags from [`docs/bcp47-translations.md`](../../../docs/bcp47-translations.md). Fill **every** tag listed there, unless a specific tag cannot be translated (say so in the report and omit or leave that key unset).
+Read the target tags from [`docs/bcp47-translations.md`](../../../docs/bcp47-translations.md). Fill **every** tag listed there. A missing single-word equivalent is not a reason to skip a tag: describe the English in that L1 instead. Omit or leave a key unset only when the tag truly cannot be translated, and say so in the report.
 
 ## Authoring fields
 
@@ -54,7 +54,8 @@ That is a phrase equivalent, not a word-for-word calque. A stock equivalent of t
 - Use `description` to pick the sense. Use `translationNotes` to choose among L1s for that sense. Use `context` only for agreement and address (speaker vs addressee gender, age, stranger vs familiar). If the English does not inflect, the L1 still may. Do not use `context` or `translationNotes` to swap in a shorter reply that drops the English meaning.
 - Two English lines may share an L1 only when both English lines really mean that same L1. Do not collapse “Nice to meet you” into “me too,” or similar.
 - For pairs (shoes, glasses), use the idiomatic modern form.
-- If no single common term exists, use a short phrase of at most 10 words and mention the English gloss in the report.
+- If the L1 has a single common term for this English, use that term.
+- If no single matching term exists, do not leave the key empty, borrow the English word, or substitute a nearby item. Write a short description of the English term in the L1, at most 10 words, so a beginner can see what it means. Example: English “hoodie”, when the L1 has no equivalent word, becomes that language’s wording for “a sweater with an attached hood”. Name those tags in the report.
 - If two terms are equally common, put the isolatable one in the JSON and mention the other in the report.
 - Transliterate names into the target script. Flag clashes with everyday words (for example Arabic `آنا` vs `أنا`).
 - State caveats in the report (misleading in some regions, religious extra meaning, and similar).
@@ -69,6 +70,7 @@ After writing, briefly tell the user:
 
 - Gender or formality choices that made two items’ English look the same but L1 differ (or the reverse)
 - Conversational substitutes you considered but rejected because they fail the isolation test
+- Items where an L1 is a description because no single matching term exists
 - Terms you were unsure of
 - Authoring nits (ids, audio names, typos) if they matter
 - Process notes that would make the next batch easier
