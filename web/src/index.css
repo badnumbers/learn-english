@@ -258,6 +258,10 @@ a.site-bar-button {
 }
 
 .language-option {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
   width: 100%;
   min-height: 3.2rem;
   padding: 0.7rem 1rem;
@@ -269,8 +273,21 @@ a.site-bar-button {
   font-size: 1.35rem;
   font-weight: 650;
   font-synthesis: none;
+  text-align: start;
   cursor: pointer;
   box-shadow: var(--shadow);
+}
+
+.language-option-english {
+  flex: none;
+  font-weight: 450;
+  color: var(--muted);
+}
+
+.language-option--selected .language-option-english,
+.language-option:hover .language-option-english,
+.language-option:focus-visible .language-option-english {
+  color: var(--accent);
 }
 
 .language-option--selected,

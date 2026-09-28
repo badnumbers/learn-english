@@ -39,27 +39,32 @@ export function LanguagePage() {
     <section className="page page--language">
       <h1>Language</h1>
       <ul className="language-list">
-        {SOURCE_LANGUAGES.map((language) => {
-          const isSelected = selected?.tag === language.tag
-          return (
-            <li key={language.tag}>
-              <button
-                type="button"
-                className={
-                  isSelected
-                    ? 'language-option language-option--selected'
-                    : 'language-option'
-                }
-                aria-pressed={isSelected}
-                onClick={() => choose(language.tag)}
-              >
-                <span dir="auto" lang={language.tag}>
-                  {language.nativeName}
-                </span>
-              </button>
-            </li>
-          )
-        })}
+        {[...SOURCE_LANGUAGES]
+          .sort((a, b) => a.englishName.localeCompare(b.englishName, 'en'))
+          .map((language) => {
+            const isSelected = selected?.tag === language.tag
+            return (
+              <li key={language.tag}>
+                <button
+                  type="button"
+                  className={
+                    isSelected
+                      ? 'language-option language-option--selected'
+                      : 'language-option'
+                  }
+                  aria-pressed={isSelected}
+                  onClick={() => choose(language.tag)}
+                >
+                  <span dir="auto" lang={language.tag}>
+                    {language.nativeName}
+                  </span>
+                  <span className="language-option-english" lang="en">
+                    ({language.englishName})
+                  </span>
+                </button>
+              </li>
+            )
+          })}
       </ul>
     </section>
   )
