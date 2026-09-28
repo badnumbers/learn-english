@@ -1,27 +1,38 @@
 # Adding translations
 
-Paste language items as a JSON array into [`documents-for-adding-translations.json`](../documents-for-adding-translations.json) at the repo root, then ask the agent to fill the L1s.
+Back up the `languageitems` container first. Then tell the agent which documents to change, and confirm the dry run before anything is written.
 
-The agent process is the project skill `.cursor/skills/add-translations/SKILL.md`. Target tags are the full list in [bcp47-translations.md](bcp47-translations.md).
+The agent follows `.cursor/skills/add-translations/SKILL.md`. Target tags are the full list in [bcp47-translations.md](bcp47-translations.md).
 
-## JSON array
+## What to ask for
 
-Each object is one **language item** (one Cosmos document). Keep system properties if you copied the document from Data Explorer (`_rid`, `_etag`, and the rest), so you can replace the item in place.
+Name a filter and the change:
 
-Put the English on an `english` element. Leave `translations` empty, or already partially filled; the agent writes one string per supported BCP 47 tag.
+- a tag, such as “fill missing Amharic on items tagged `clothes`”
+- one or more language item ids
+
+The agent reads those documents from Cosmos, chooses the L1s, and shows a dry run. Nothing is written until you confirm that diff. Then spot-check a few items in the app.
+
+`scripts/update-translations.py` does the read and the write. The Cosmos endpoint, database, and container come from `api/local.settings.json`. The account key comes from `scripts/cosmos-read-write-key.txt`, which is gitignored. Put the primary read-write key there, either on its own or as a full connection string. The app keeps using `COSMOS_CONNECTION_STRING` and does not need that key. The primary key can change anything in the Cosmos account, not only this container.
+
+```bash
+python3 scripts/update-translations.py query --tag clothes
+python3 scripts/update-translations.py apply /tmp/translation-patch.json
+python3 scripts/update-translations.py apply /tmp/translation-patch.json --write
+```
+
+`query` prints the documents and writes nothing. `apply` prints the gloss diff and writes nothing. `apply --write` replaces only the `translations` object, using the document `_etag`, and leaves every other field as it was. Pass `--id` instead of `--tag` to select by language item id. Repeat `--tag` when the document must have every listed tag.
 
 ## Authoring fields
 
-`description` property provides a more detailed description of the meaning, intended for ambiguity or to highlight flow in a conversation.
+`description` is the meaning of the English, used when the English is ambiguous or when a conversation turn needs its place in the exchange.
 
-`context` provides information about the social (and possibly other) context, for example, the genders and relative ages of the speakers.
+`context` is the social situation, such as who is speaking and to whom.
 
 `translationNotes` says how to choose an L1 when several words could gloss that meaning: a preferred term, an allowed fallback, or the word the public actually uses.
 
-None of these fields is shown in the app. They only guide translation. If two turns use the same English but different speakers, say so in `context`; some L1s will still differ. Keep `tags` (a string array for finding documents in Cosmos) if it is present; the app does not use it.
+The app shows none of these. `tags` is a string array for finding documents. Each L1 must still make sense on its own, as in a quiz. There is one student-facing `translations` object.
 
-Each L1 must still make sense **in isolation**: a fair translation of that English if the language item stood alone (for example in a later quiz). Do not store a second, more literal map. The one `translations` object is the student-facing gloss.
+## After a write
 
-## After translation
-
-Read the agent’s notes (gender, formality, names, unsure terms), then copy each document back into the `languageitems` container.
+Read the agent’s notes (gender, formality, names, descriptions used because a language has no single word, unsure terms), then open a study list that includes a few of the changed ids.

@@ -8,3 +8,7 @@ local.settings.json
 *.user
 *.suo
 .DS_Store
+__pycache__/
+*.pyc
+
+cosmos-read-write-key.txt
