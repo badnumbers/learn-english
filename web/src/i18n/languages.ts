@@ -9,6 +9,7 @@ export type SourceLanguage = {
 export const SOURCE_LANGUAGES: readonly SourceLanguage[] = [
   { tag: 'am-ET', nativeName: 'አማርኛ', englishName: 'Amharic' },
   { tag: 'ar-001', nativeName: 'العربية', englishName: 'Arabic' },
+  { tag: 'bn-BD', nativeName: 'বাংলা', englishName: 'Bengali' },
   { tag: 'my-MM', nativeName: 'မြန်မာ', englishName: 'Burmese' },
   { tag: 'ps-Arab-AF', nativeName: 'پښتو', englishName: 'Pashto' },
   { tag: 'fa-IR', nativeName: 'فارسی', englishName: 'Persian' },

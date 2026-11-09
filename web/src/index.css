@@ -15,6 +15,11 @@
   background: var(--bg);
 }
 
+:lang(bn) {
+  font-family: "Noto Sans Bengali", var(--sans);
+  font-synthesis: none;
+}
+
 :lang(my) {
   font-family: "Noto Sans Myanmar", var(--sans);
   font-synthesis: none;

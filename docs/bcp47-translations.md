@@ -17,6 +17,7 @@ Supported L1s:
 | `tr-TR` | Turkish |
 | `ti-ER` | Tigrinya as spoken in Eritrea |
 | `am-ET` | Amharic as spoken in Ethiopia |
+| `bn-BD` | Bengali as spoken in Bangladesh |
 
 `es-419` is Spanish for **Latin America and the Caribbean** (UN M.49 region `419`). That is the usual contrast with Spain (`es-ES`). There is no widely used “South America only” Spanish tag; `es-005` (South America) is valid BCP 47 but rarely used. `419` includes Mexico and Central America as well as South America.
 
@@ -27,6 +28,8 @@ Supported L1s:
 `ti-ER` is Tigrinya as used in Eritrea, not Ethiopia (`ti-ET`).
 
 `am-ET` is Amharic as used in Ethiopia.
+
+`bn-BD` is Bengali as used in Bangladesh, not India (`bn-IN`). The Bengali script is the default for `bn`, so the tag has no script subtag.
 
 Example:
 
